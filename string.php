@@ -72,11 +72,38 @@ print $string = implode(' ',$words);
 print $string = implode(' ',array_reverse(explode(' ',$string)));
 echo "<br><br>";
 
-$sometext = 'str_repeat does not repeat symbol with code 0 on some';
+$sometext = 'str_repeat does not repeat symbol WITH with code 0 on some';
 print ucfirst($sometext); // функция делает заглавной только первую букву в строке
 print ucwords($sometext); // функция делает все буквы заглавными
-print strtoupper
+print strtoupper($sometext); // функция делает все заглавными
+print strtolower($sometext); // функция делает все маленькими
 
+/**
+ * Работа со строковыми функциями
+ * @author дизайн студия ox2.ru  
+ */
+//Строка, которую нужно привести к виду "ox2.ru". 
+//Заметьте что адрес сайта еще и окружен пробелами! 
+$string = " http://www.ox2.ru/ ";
+ 
+$string = trim($string, "/ "); //Удаляем пробелы по-бокам, и слэш справа
+if (strpos($string, "http://") !== false) { //Если в строке присутствует подстрока http://, то: 
+    $string = substr($string, strpos($string, "http://")  + strlen("http://")); //Обрезаем
+}
+if (strpos($string, "www.") !== false) {
+    $string = substr($string, strpos($string, "www.") + strlen("www."));
+}
+echo ""$string"";
 
+// или можно так короче
+
+echo str_replace("www.", "", str_replace("http://", "", trim(" http://www.ox2.ru/ ", "/ ")));
 
 ?>
+
+strlen ("текст") — считает количество символов в строке
+str_replace("что заменять", "на что заменять", "текст"); – функция нужна для замены подстроки в строке.
+trim ("текст", "символы") — удаляет символы по краям
+substr("Строка", "Начальная позиция", "Конечная позиция"); - возвращает часть строки
+strpos("Строка", "подстрока", позиция начального символа); — возвращает позицию найденной подстроки в строке
+
