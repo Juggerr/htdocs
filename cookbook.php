@@ -11,12 +11,12 @@ $filename = './sales.csv';
 $fn = fopen($filename, 'w') or die ('Cant open filename');
 foreach ($sales as $sales_line)
 {
-	if (fputcsv($fh, $sales_line) === false)
+	if (fputcsv($fn, $sales_line) === false)
 	{
 		die("cant write CSV line");
 	}
 }
-fclose($fh) or die ("cant close $filename");
+fclose($fn) or die ("cant close $filename");
 
 
 
