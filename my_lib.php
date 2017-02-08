@@ -7,6 +7,7 @@
 3. Чистка урла от мусора
 4. str_replace_once  функция которая заменяет только первое вхождение
 5. делает из имен сайтов ссылки 
+6. преобразует файлы цвс новой почты в читаемый текст на пхп
 */
 
 // 1. =============================очистка телефона от мусора (пробелов, тире, скобок) 
@@ -69,6 +70,16 @@ $test = 'ehali medvedi yandex.ru poteryali i gde on etot yandex.ru and google.co
 $found = 'yandex.ru';
 $test = str_replace ($found, "<a href=http://{$found}>{$found}</a>", $test);
 print $test;
+
+// 6. преобразует файлы цвс новой почты в читаемый текст на пхп
+
+$handle = fopen('np.csv', 'r');
+$handle2 = fopen('np-new.csv', 'w');
+$text = fread($handle, filesize('np.csv')); 
+$text = iconv("UTF-16", "UTF-8", $text);
+fwrite($handle2, $text);
+fclose($handle);
+fclose($handle2);
 
 
 ?>

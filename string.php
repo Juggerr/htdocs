@@ -12,6 +12,8 @@ str_replace ($search , $replace , $subject) заменяет все вхожде
 substr_replace($test, 'google', $position_of_search_word, $length_searching_word);
 preg_replace ($regular, $new-value, $string) ищет в строке по регулярке и заменяет его 
 
+ wordwrap($texter, 10) форматирует текст по 10 символов в строку
+
 strtoupper strtolower большие или маленькие буквы делаем strstr($haystack, needle) ищет в стоге первое вхождение иголки и возвращает строку начиная с нее
 strrev ($string) переставляет все символы в строке по байтам задомнаперед
 implode ('delimiter', $string) - разбивает строку на слова спомощью делимитера и помещает их в массив

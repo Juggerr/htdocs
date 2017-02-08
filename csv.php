@@ -44,9 +44,7 @@ ob_end_clean();
 
 
 $texter = "В столице образовались 10-бальнные пробки по версии Яндекс.Пробки. Согласно данным сервиса, произошло уже 17 ДТП. Так, на Южном и Гаванском мостах скорость движения не превышает 5 км/час. Авто на Набережном шоссе движется не более 40 км/час. Пробки в Киеве";
-$filename = "test.txt";
 
-print wordwrap($texter, 10,  "<br />\n");
 /*
 $handler = '';
 $handler = fopen($filename, 'w') or die ("cant open {$filename}");
@@ -85,28 +83,42 @@ fclose($handle) or die ("cant close file");
 }
 */
 
-/*
+
+$handle = fopen('np.csv', 'r');
+$handle2 = fopen('np-new.csv', 'w');
+$text = fread($handle, filesize('np.csv')); 
+$text = iconv("UTF-16", "UTF-8", $text);
+fwrite($handle2, $text);
+fclose($handle);
+fclose($handle2);
+
+
+$array = array();
 // рабочий вариант чтения csv file
 $row = 1;
-if (($handle = fopen("np.csv", "r")) !== FALSE) 
+if (($handle = fopen("np-new.csv", "r")) !== FALSE) 
 {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) 
+	//$text = fread($handle, filesize('np.csv')); 
+	//$text = iconv("UTF-16", "UTF-8", $text);
+    while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) 
     {
         $num = count($data);
         echo "<p> $num полей в строке $row: <br /></p>\n";
         $row++;
         for ($c=0; $c < $num; $c++)
         {
-            echo $data[$c] . "<br />\n";
+        	
+            $array[$c] = $data[$c] . "<br/>";
+            
+        
         }
     }
     fclose($handle);
-}*/
+}
 
 
+print_r($array);
 
-$csv = array_map('str_getcsv', file('np.csv'));
-print_r ($csv);
  
 
 ?>
