@@ -93,7 +93,7 @@ fclose($handle);
 fclose($handle2);
 
 
-$array = array();
+$array = array(array());
 // рабочий вариант чтения csv file
 $row = 1;
 if (($handle = fopen("np-new.csv", "r")) !== FALSE) 
@@ -108,7 +108,7 @@ if (($handle = fopen("np-new.csv", "r")) !== FALSE)
         for ($c=0; $c < $num; $c++)
         {
         	
-            $array[$c] = $data[$c] . "<br/>";
+            $array[$row][$c] = $data[$c] . "<br/>";
             
         
         }
@@ -116,10 +116,55 @@ if (($handle = fopen("np-new.csv", "r")) !== FALSE)
     fclose($handle);
 }
 
+$arrayString = array();
+$count = count($array);
 
-print_r($array);
+for ($i = 3; $i < $count; $i++)
+{
+$name_client = $array[$i][11]; // кто будет получатель
+$dateDeparture = $array[$i][4]; //дата отправления
+$enNumber = $array[$i][0]; // номер декл 
+$sklad = $array[$i][10]; // какой склад 
+$deliveryDate = $array[$i][20]; // когда будет  
+$weight = $array[$i][13]; // вес посылки
+
+if($array[$i][29] == 'Відправник')
+{ // кто платит если Клиент то значение нулевое, если отправитель оплачивает то пишем слово оплачено  
+$payment = "Доставка оплачена";
+} 
+$payment = "За доставку".$array[$i][29]; 
+
+$stringClient = $name_client."</br> Добрый день, заказ отправили {$dateDeparture}  Новая Почта - {$sklad} номер декларации {$enNumber}, {$payment}, вес {$weight}кг, будет у вас {$deliveryDate} </br></br></br>"; 
+
+$arrayString[$i] = $stringClient;
+
+
+}
+
+
+// алгоритм такой, в конце должен будет создать быть массив многомерный, с уже заполеными стринт-клиент и его мы потом пишем в файл 
+// выбираем из массива с данными определенные поля подставляем их в стринг-клиент, и идем дальше пока не наступит конец массива
+
+print_r($arrayString);
+//print_r($array);
 
  
+// {$name_client} $array[3][11] кто будет получатель
+// {$dateDeparture} $array[3][4] дата отправления
+// {$enNumber} $array[3][0] - номер декл 
+// {$sklad} $array[3][10] какой склад 
+// {$deliveryDate} $array[3][20] когда будет  
+// {$weight} $array[3][13] вес посылки
+// {$payment} $array[3][29] кто платит если Клиент то значение нулевое, если отправитель оплачивает то пишем слово оплачено Відправник Отримувач
+
+
+// $stringClient = {$name_client}</br>
+// Добрый день, заказ отправили {$dateDeparture}
+// Новая Почта - {$sklad} 
+// номер декларации {$enNumber}, {$payment}, вес {$payment} кг 
+// будет у вас {$deliveryDate} </br></br></br>
+
+
 
 ?>
 
