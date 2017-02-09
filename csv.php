@@ -108,7 +108,7 @@ if (($handle = fopen("np-new.csv", "r")) !== FALSE)
         for ($c=0; $c < $num; $c++)
         {
         	
-            $array[$row][$c] = $data[$c] . "<br/>";
+            $array[$row][$c] = $data[$c];
             
         
         }
@@ -127,26 +127,23 @@ $enNumber = $array[$i][0]; // номер декл
 $sklad = $array[$i][10]; // какой склад 
 $deliveryDate = $array[$i][20]; // когда будет  
 $weight = $array[$i][13]; // вес посылки
+$payment = $array[$i][29];
+$price = $array[$i][16];
 
-if($array[$i][29] == 'Відправник')
-{ // кто платит если Клиент то значение нулевое, если отправитель оплачивает то пишем слово оплачено  
-$payment = "Доставка оплачена";
-} 
-$payment = "За доставку".$array[$i][29]; 
-
-$stringClient = $name_client."</br> Добрый день, заказ отправили {$dateDeparture}  Новая Почта - {$sklad} номер декларации {$enNumber}, {$payment}, вес {$weight}кг, будет у вас {$deliveryDate} </br></br></br>"; 
+$stringClient = $name_client."\n\nДобрый день, заказ отправили {$dateDeparture}, Новая Почта - {$sklad}, номер декларации {$enNumber}, оплачено, вес {$weight}кг, будет у вас {$deliveryDate}\n\n\n"; 
 
 $arrayString[$i] = $stringClient;
-
-
+//var_dump($arrayString);
 }
-
+$handle4 = fopen('mail.txt', 'w');
+fwrite($handle4, serialize($arrayString));
+fclose($handle4);
 
 // алгоритм такой, в конце должен будет создать быть массив многомерный, с уже заполеными стринт-клиент и его мы потом пишем в файл 
 // выбираем из массива с данными определенные поля подставляем их в стринг-клиент, и идем дальше пока не наступит конец массива
 
 print_r($arrayString);
-//print_r($array);
+print_r($array);
 
  
 // {$name_client} $array[3][11] кто будет получатель
