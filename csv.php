@@ -118,10 +118,14 @@ if (($handle = fopen("np-new.csv", "r")) !== FALSE)
 
 $arrayString = array();
 $count = count($array);
+$counter = 0;
+DEFINE ('OTPRAVITEL', 'Відправник');
+DEFINE ('POLUCHATEL', 'Отримувач');
 
-for ($i = 3; $i < $count; $i++)
+for ($i = 3; $i <= $count; $i++)
 {
-$name_client = $array[$i][11]; // кто будет получатель
+$nameСlient = $array[$i][11]; // кто будет получатель
+$secondNameСlient = $array[$i][8]; // кто будет получатель (приватна особа)
 $dateDeparture = $array[$i][4]; //дата отправления
 $enNumber = $array[$i][0]; // номер декл 
 $sklad = $array[$i][10]; // какой склад 
@@ -129,8 +133,16 @@ $deliveryDate = $array[$i][20]; // когда будет
 $weight = $array[$i][13]; // вес посылки
 $payment = $array[$i][29];
 $price = $array[$i][16];
+$counter++;
+$result = '';
 
-$stringClient = $name_client."\n\nДобрый день, заказ отправили {$dateDeparture}, Новая Почта - {$sklad}, номер декларации {$enNumber}, оплачено, вес {$weight}кг, будет у вас {$deliveryDate}\n\n\n"; 
+if($payment == OTPRAVITEL)
+{
+$result = 'Доставка оплачена';
+} else {
+$result = 'За доставку: '.$price."грн.";
+}
+$stringClient = $counter."  ".$nameСlient." // ".$secondNameСlient."\n\nДобрый день, заказ отправили {$dateDeparture}, Новая Почта - {$sklad}, номер декларации {$enNumber}, {$result}, вес {$weight}кг, будет у вас {$deliveryDate}\n\n\n"; 
 
 $arrayString[$i] = $stringClient;
 //var_dump($arrayString);
