@@ -11,6 +11,8 @@ range() - создает массив значений, к примеру range(
 также может возращать массив из символов в указанном диапазоне
 mt_rand() - функция генерурует случайное число из диапазона, также есть более простая функция rand()
 mt_srand() - если инициализировать вначале перед использованием мт_ранд то случайные значения будут предсказуемые.
+number_format() форматирует число под удобочиваемый вид, делает точки между тысячами т.е. делает разделители разрядов
+base_convert() - преобразует между различными системами счисления
 
 */
 $test = array('alibaba', 2000, 'target', 0, 234, 'tes', 89);
@@ -53,7 +55,7 @@ function pick_color()
 mt_srand(1);
 $first = pick_color();
 $second = pick_color();
-print "{$first} and {$second} forewer the same!";
+print "{$first} and {$second} forewer the sam e!<br>";
 
 
 function rand_weighted($numbers)
@@ -61,8 +63,8 @@ function rand_weighted($numbers)
 	$total = 0;
 	foreach ($numbers as $number => $weight)
 	{
-		$total += $weight;
-		$distribution[$number] = $total;
+		echo $total += $weight;
+		echo $distribution[$number] = $total;
 	}
 	$rand = mt_rand(0, $total -1);
 	foreach ($distribution as $number => $weights) 
@@ -71,8 +73,79 @@ function rand_weighted($numbers)
 	}
 }
 
-$ads = array ('ford' => 2435, 'mers' => 3455, 'audi' => 4003);
+$ads = array ('ford' => 1111, 'mers' => 2222, 'audi' => 3333);
 echo $ad = rand_weighted($ads);
+
+echo $test = number_format(495879457.4545);
+$number = 1234.56;
+$usa = new NumberFormatter('en-US', NumberFormatter::CURRENCY);
+echo $formatted = $usa -> format($number);
+
+
+function may_pluralize($singular_word, $amount_of) 
+{
+
+$plurals = array(
+	'fish' => 'fish',
+	'person' => 'people',
+	'man' => 'men',
+	'woman' => 'women');
+
+if (1 == $amount_of)
+{
+	return $singular_word;
+}
+
+if (isset($plurals[$singular_word]))
+{
+	return $plurals[$singular_word];
+}
+return $singular_word. 's';
+}
+
+echo may_pluralize('man', 2);
+
+
+$dec = 255;
+$hex = 'f0f';
+$bin = '0101011';
+
+echo base_convert($bin, 2, 10);
+for ($i = 0; $i < 1000; $i++)
+{
+	$a = wordwrap(decbin($i), 90);
+	$a .= "<br>";
+echo $a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ?>
