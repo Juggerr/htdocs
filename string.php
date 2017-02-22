@@ -18,6 +18,7 @@ strtoupper strtolower большие или маленькие буквы дел
 strrev ($string) переставляет все символы в строке по байтам задомнаперед
 implode ('delimiter', $string) - разбивает строку на слова спомощью делимитера и помещает их в массив
 explode ('delimiter', $string) - объединяет элементы массива в строку
+str_split() — Преобразует строку в массив
 */
 
 $text = 'some text here and there like that abracadabra';

@@ -5,7 +5,8 @@
 
 array() - создание массива - функция
 array('color' => 'red') - создание ассоциативного массива
-array_push($array, $value, $value2...) - добавляет в массив значение в последнюю позицию (массив работает как стек)
+array_push($array, $value, $value2...) - добавляет в массив значение в последнюю позицию (массив работает как стек) это тоже самое что и $array[] = $var;
+
 array_pop($array, $value) - выталкивает последнее значение из массива (по типу стека) и возвращает его как значение
 list($var, $var2, $var3) = $array - разбить массив на отдельные переменные
 range(2,20, 1) -  создает массив с диапазоном чисел 2-20 и шагом 1
@@ -25,11 +26,13 @@ unset() - удаляет переменную или элемент массив
 
 array_splice($array, $offset - c какого индекса начнется удаление, $length - сколько удалять) — Удаляет часть массива и заменяет её чем-нибудь ещё
 array_splice($array, 2, 2) вырезание из архива с 2 позиции, 2 ключ+значение
+array_pad($array, 5, 'a') - расшираяет массив до нужного размера, к примеру на 5 позиций и заполняет их 'a' - функция возвращает модифицированную копию массива!!!  если значение 5 будет отрицательным то расширение произойдет с начала массива.
 
 array_values() — если массив ассоциативный то функция приводит к индексным ключам весь массив т.е. было 'aaa' => 'a' стало 01 => 'a';
 
 
 array_shift() -  извлечь первое значение массива и возращает его скращая на 1
+array_unshift() - поместить значение в начало массива
 
 array_pop() - извлекает последнее значение массива и возращает его сокращая на 1
 
@@ -54,39 +57,39 @@ foreach ($array as $key => $value)
 
 */
 
-$testarray = range(0, 100, 1);
 
-$newArray = array_slice($testarray, 80, 20);
-$count = count($newArray);
-$newArray = array_pad($newArray, 10, "d");
+$sometext = 'albania-forewer';
+$reversetext = '';
+$count = strlen($sometext);
+$count2 = $count;
+$count2--;
 
-$count2 = count($newArray);
-print_r($newArray);
-echo "{$count} - before: {$count2}";
-
-
-
-$arrayz = array (
-1 => 'a',
-'test' => 'b',
-3 => 'c',
-4 => 'd',
-5 => 'f',
-6 => 'g',
-7 => 'h',
-8 => 'm',
-9 => 'x',
-10 => 'z'
-);
-
-foreach ($arrayz as $key => $value)
+for ($i = 0; $i < $count; $i++)
 {
-//	echo "{$key} - {$value}</br>";
-	$value = $value.'-adder';
-	//echo "new value is {$value}</br>";
-}	
+@$reversetext[$i] .= $sometext[$count2--];
+}
+$reversetext = implode($reversetext);
 
-$some = array_values($arrayz);
+print($reversetext);
+
+/*
+$testarray = range('a', 'z', 1);
+$twoarray = range(1, 25, 1);
+$threearray = array_merge($testarray, $twoarray);
+
+$count = count($threearray);
+
+foreach ($threearray as $key => $value)
+{
+	echo "Index: {$key} - Value is: {$value}<br>";
+}
+echo "Original count: {$count}";
+*/
+
+
+
+
+
 
 $colorArray = ['red', 'white', 'green', 'blue', 'orange'];
 $brandArray = ['mercedes', 'bmv', 'audi', 'jeep', 'toyota'];
